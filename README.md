@@ -24,7 +24,10 @@ Here we propose an innovative way of secure key distribution using a web interfa
 
 Our key distribution technique is based on the E91 protocol. 
 
-![image](https://user-images.githubusercontent.com/68393451/151702199-7d0bac60-b2e0-405f-a7d0-5ac462314bba.png)
+<p align="center">
+  <img width="600" height="400" src="https://user-images.githubusercontent.com/68393451/151702199-7d0bac60-b2e0-405f-a7d0-5ac462314bba.png">
+</p>
+
 
 Image source: [link](https://medium.com/@qcgiitr/fundamentals-of-quantum-key-distribution-bb84-b92-e91-protocols-e1373b683ead)
 
