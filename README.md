@@ -1,5 +1,7 @@
+<p align="center">
+  <img width="300" height="300" src="https://user-images.githubusercontent.com/68393451/151703562-0879fe36-5f32-46d6-b4e9-ad713b2474db.png">
+</p>
 
-![image](https://user-images.githubusercontent.com/68393451/151698106-9d09631f-8883-4376-a01e-9ef92d1f317b.png)
 
 
 # Q-Sup
