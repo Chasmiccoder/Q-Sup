@@ -4,7 +4,7 @@
 
 
 # Q-Sup
-A messaging interface using a QKD protocol
+A web-based interface to perform QKD.
 
 # Abstract
 
