@@ -14,7 +14,7 @@ Two users A and B are stuck in a maze and the only way they can leave the maze i
 # A little bit about Q - Sup
 Q-Sup revolves around three parties : Alice, Bob and the server. Alice and Bob are assumed to be the users of the app nad the server is the intermediate channel.
 
-The following flow chart encapsultes the working of the app :
+The following flow chart encapsulates the working of the app :
 
 ![image](https://user-images.githubusercontent.com/68393451/151696305-77b7bbf9-b7fe-4c59-b434-88a15a4e9e81.png)
 
