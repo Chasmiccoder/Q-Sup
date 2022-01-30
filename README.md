@@ -14,10 +14,9 @@ Here we propose an innovative way of secure key distribution using a web interfa
 
 # Walkthrough
 
-
 1. User A logs in to the server.
 2. The user then inputs a randomly generated string of three digits.
-3. The server performs partial measurements on a sequence of entangled states and returns the result to the user.
+3. Based on the input string, the server performs partial measurements on a sequence of entangled states and returns the result to the user.
 4. User B logs in to the server and does the same.
 5. The two users discuss their measurement sequence on a classical channel.
 6. They retain the bits on those indices for which their measurements were performed on the same index.
