@@ -22,12 +22,11 @@ Here we propose an innovative way of secure key distribution using a web interfa
 
 # Theory
 
-Our key distribution technique is based on the E91 protocol. 
+Our key distribution technique is based on the E91 protocol with some slight changes. In our project we use a web-server as in intermediate interface which sends inputs to the QInspire backend and sends the measurement results to the respective user after performing partial measurements.
 
-<p align="center">
-  <img width="600" height="400" src="https://user-images.githubusercontent.com/68393451/151702199-7d0bac60-b2e0-405f-a7d0-5ac462314bba.png">
-</p>
+To learn more about the protocol go to this link: https://en.wikipedia.org/wiki/Quantum_key_distribution#E91_protocol:_Artur_Ekert_.281991.29
 
+![image](https://user-images.githubusercontent.com/68393451/151702199-7d0bac60-b2e0-405f-a7d0-5ac462314bba.png)
 
 Image source: [link](https://medium.com/@qcgiitr/fundamentals-of-quantum-key-distribution-bb84-b92-e91-protocols-e1373b683ead)
 
