@@ -19,9 +19,10 @@ Our key distribution technique is based on the E91 protocol.
 Image source: [link](https://medium.com/@qcgiitr/fundamentals-of-quantum-key-distribution-bb84-b92-e91-protocols-e1373b683ead)
 
 
-# A little bit about Q - Sup
-Q-Sup revolves around three parties : Alice, Bob and the server. Alice and Bob are assumed to be the users of the app nad the server is the intermediate channel.
-Two users- A and B  and the server which serves as the intermediate channel. For two users to communicate, they need to input the same bit string. They need to excahnge this key in a way that is only known to them. 
+# Walkthrough
+
+1. First User inputs a randomly generated string composed of 3 digits -1,2,3.
+2. 
 
 The following flow chart encapsulates the working of the app :
 
