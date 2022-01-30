@@ -21,12 +21,13 @@ Image source: [link](https://medium.com/@qcgiitr/fundamentals-of-quantum-key-dis
 
 # Walkthrough
 
-1. First User inputs a randomly generated string composed of 3 digits -1,2,3.
-2. 
+1. User A logs in to the server.
+2. The user then inputs a randomly generated string of three digits.
+3. User B logs into server and does the same.
+4. The two strings are sent to the backend to perform a sequence of measurements using a particular set of basis.
+5. 
 
-The following flow chart encapsulates the working of the app :
 
-![image](https://user-images.githubusercontent.com/68393451/151696305-77b7bbf9-b7fe-4c59-b434-88a15a4e9e81.png)
 
 
 
