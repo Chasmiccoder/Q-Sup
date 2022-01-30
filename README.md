@@ -24,7 +24,7 @@ Here we propose an innovative way of secure key distribution using a web interfa
 
 # Theory
 
-Our key distribution technique is based on the E91 protocol. We propose to extend this idea to a greater number of users by using entangled states with more qubits. For instance, if we want to secure a key among three users, we can use the ghz state. Depending on the initial state, some users may have to invert their strings to get the key.
+Our key distribution technique is based on the E91 protocol. Depending on the initial state, some users may have to invert their strings to get the key.
 
 To learn more about the protocol go to this link: https://en.wikipedia.org/wiki/Quantum_key_distribution#E91_protocol:_Artur_Ekert_.281991.29
 
