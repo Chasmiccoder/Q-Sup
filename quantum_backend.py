@@ -1,9 +1,5 @@
 """
 
-NOTE:
-Very useful video -
-https://www.youtube.com/watch?v=u_K9jPBrOwA
-
 """
 
 import os
