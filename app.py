@@ -48,7 +48,8 @@ def send_measurement_sequence():
 def check_handshake():
     status = False
 
-    if global_measurement_bases["received"] == 2:
+    users = global_measurement_bases.keys()
+    if "user1" in users and "user2" in users:
         status = True
     
     dataReply = json.dumps( { "status": status } )

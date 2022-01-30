@@ -5,8 +5,19 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Q Sup!</title>
+
+    <!-- Q-Sup Favicon -->
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/main.css') }}">
+
 </head>
 <body>
+
+    <div id="top-bar">
+        <img src="../static/q_sup_logo.svg" alt="Q Sup Logo" id="q_sup_logo">
+        <p id="tagline">Communicate securely, with Quantum Key Distribution</p>
+    </div>
     
     <div class="login" id="login-div">
         <form action="" id="login-form">
@@ -21,8 +32,6 @@
     <div class="communicate" id="communicate-div">
 
     </div>
-
-    
 
     
     

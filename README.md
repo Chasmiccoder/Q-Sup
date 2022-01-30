@@ -24,5 +24,7 @@ pip install -r requirements.txt
 python -m flask run
 ```
 
+Resources -
+<a href="https://www.freepik.com/vectors/background">Background vector created by coolvector - www.freepik.com</a>
 
 

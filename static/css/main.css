@@ -1,0 +1,42 @@
+* {
+    
+    padding: 0;
+    margin: 0;
+}
+
+body{ 
+    background: url(../background.jpg);
+}
+
+#top-bar {
+    display: flex;
+    padding: 20px;
+}
+
+#tagline {
+    font-size: 20px;
+    font-style: italic;
+    margin-top: 100px;
+    padding: 20px;
+}
+
+#q_sup_logo {
+
+}
+
+#login-div {
+    margin-top: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#communicate-div {
+    background-color: white;
+    margin: 2rem;
+    border: 1px black;
+    border-radius: 10px;
+    border-style: groove;
+}
+
+

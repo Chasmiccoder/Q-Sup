@@ -40,7 +40,7 @@ const initiateTextChannel = () => {
     description.setAttribute("id", "description-p");
     
     var div = document.getElementById("communicate-div");
-    
+    div.style.padding = "1rem";
     var form = document.createElement("form");
     form.setAttribute("id", "send-measurement");
     
@@ -49,6 +49,7 @@ const initiateTextChannel = () => {
     measurementSequence.setAttribute("name", "measurement-sequence");
     measurementSequence.setAttribute("placeholder", "enter measurement bases");
     measurementSequence.setAttribute("id", "measurement-bases-inp");
+    measurementSequence.style.padding = "0.5rem";
 
     // submit the bases to interface
     var sub = document.createElement("input");
@@ -58,10 +59,15 @@ const initiateTextChannel = () => {
     var sendStatus = document.createElement("p");
     sendStatus.setAttribute("id", "send-status-p");  
 
+    var breakTag = document.createElement("br");
+
     form.appendChild(measurementSequence);
     form.appendChild(sub);
+    div.appendChild(breakTag);
     div.appendChild(description);
+    div.appendChild(breakTag);
     div.appendChild(form);
+    div.appendChild(breakTag);
     div.appendChild(sendStatus);
 
     document.getElementById("description-p").innerHTML = str;
@@ -75,9 +81,7 @@ const sendMeasurement = (event) => {
     event.preventDefault();
 
     document.getElementById("send-status-p").innerHTML = "Sending measurement bases...";
-    
     let stringSequence = document.getElementById("measurement-bases-inp").value;
-
     let bases = [];
 
     if(stringSequence.length != 10) {
@@ -96,9 +100,7 @@ const sendMeasurement = (event) => {
     }
 
     console.log(bases);
-    
     var xml = new XMLHttpRequest();
-
     xml.open("POST", "/send_measurement_sequence", true);
     xml.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
@@ -132,7 +134,6 @@ const initiateQKD = () => {
     var handshake = document.createElement("button");
     handshake.setAttribute("id", "check-handshake-btn");
     
-
     div.appendChild(handshake);
     div.appendChild(handshake_status);
 
@@ -148,7 +149,6 @@ const check_handshake = (event) => {
     var xml = new XMLHttpRequest();
     xml.open("POST", "/check_handshake", true);
     xml.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-
     xml.onload = function() {
         var dataReply = JSON.parse(this.responseText);
         
@@ -162,7 +162,6 @@ const check_handshake = (event) => {
     };
 
     dataSend = {}
-
     xml.send(JSON.stringify(dataSend));
 }
 
@@ -175,10 +174,8 @@ const isNumber = (str) => {
     }
 }
 
-
 var currentUser = null;
 
 const login_form = document.getElementById("login-form");
 login_form.onsubmit = authenticate;
-
 
