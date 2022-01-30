@@ -38,6 +38,7 @@ qi_result = qi_job.result()
 histogram = qi_result.get_counts(circuit)
 print('\nState\tCounts')
 [print('{0}\t\t{1}'.format(state, counts)) for state, counts in histogram.items()]
+
 # Print the full state probabilities histogram
 probabilities_histogram = qi_result.get_probabilities(circuit)
 print('\nState\tProbabilities')
