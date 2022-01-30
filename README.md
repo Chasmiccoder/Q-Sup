@@ -10,3 +10,19 @@ Two users A and B are stuck in a maze and the only way they can leave the maze i
 ![image](https://user-images.githubusercontent.com/68393451/151692204-7eb03351-9baf-4d18-850f-2e0956ae4b63.png)
 
  The above image is a rough representation of the E91 protocol set-up
+
+
+
+
+
+
+
+Set up -
+
+```
+pip install -r requirements.txt
+python -m flask run
+```
+
+
+

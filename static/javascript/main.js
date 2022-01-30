@@ -38,7 +38,6 @@ const initiateTextChannel = () => {
 
     var description = document.createElement("p");
     description.setAttribute("id", "description-p");
-    description.setAttribute("value", str);
     
     var div = document.getElementById("communicate-div");
     
@@ -56,7 +55,6 @@ const initiateTextChannel = () => {
     sub.setAttribute("type", "submit");
     sub.setAttribute("value", "Submit");
 
-    
     var sendStatus = document.createElement("p");
     sendStatus.setAttribute("id", "send-status-p");  
 
@@ -65,6 +63,8 @@ const initiateTextChannel = () => {
     div.appendChild(description);
     div.appendChild(form);
     div.appendChild(sendStatus);
+
+    document.getElementById("description-p").innerHTML = str;
     
     const measurement_form = document.getElementById("send-measurement");
     measurement_form.onsubmit = sendMeasurement;
@@ -76,7 +76,6 @@ const sendMeasurement = (event) => {
 
     document.getElementById("send-status-p").innerHTML = "Sending measurement bases...";
     
-
     let stringSequence = document.getElementById("measurement-bases-inp").value;
 
     let bases = [];
@@ -109,6 +108,7 @@ const sendMeasurement = (event) => {
         console.log("reply", dataReply);
         if(dataReply["status"]) {
             document.getElementById("send-status-p").innerHTML = "Your bases have been sent the interface successfully!";
+            initiateQKD();
         } else {
             document.getElementById("send-status-p").innerHTML = "Oops, something went wrong. Please try again :(";
         }
@@ -121,6 +121,51 @@ const sendMeasurement = (event) => {
     
     xml.send(JSON.stringify(dataSend));
 }
+
+const initiateQKD = () => {
+    
+    var div = document.getElementById("communicate-div");
+
+    var handshake_status = document.createElement("p");
+    handshake_status.setAttribute("id", "handshake-status-p");
+
+    var handshake = document.createElement("button");
+    handshake.setAttribute("id", "check-handshake-btn");
+    
+
+    div.appendChild(handshake);
+    div.appendChild(handshake_status);
+
+    let element = document.getElementById("check-handshake-btn");
+    element.addEventListener("click", check_handshake);
+    document.getElementById("check-handshake-btn").innerText = "Check for a handshake";
+}
+
+
+// basically, this function checks whether both users have supplied their measurement bases to the interface or not
+const check_handshake = (event) => {
+
+    var xml = new XMLHttpRequest();
+    xml.open("POST", "/check_handshake", true);
+    xml.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+    xml.onload = function() {
+        var dataReply = JSON.parse(this.responseText);
+        
+        if (dataReply["status"] == false) {
+            str = "Please wait until the other user sends their measurement bases!";
+            document.getElementById("handshake-status-p").innerHTML = str;
+        } else {
+            str = "The system is ready for quantum key distribution!";
+            document.getElementById("handshake-status-p").innerHTML = str;
+        }
+    };
+
+    dataSend = {}
+
+    xml.send(JSON.stringify(dataSend));
+}
+
 
 const isNumber = (str) => {
     if(typeof str != "string") {

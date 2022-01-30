@@ -3,6 +3,7 @@ import json
 app = Flask(__name__)
 
 global_measurement_bases = {}
+global_measurement_bases["received"] = 0
 
 @app.route("/")
 def home():
@@ -35,10 +36,21 @@ def send_measurement_sequence():
     measurement_bases = dataGet["measurement-bases"]
 
     global_measurement_bases[username] = measurement_bases # Keeping the bases in a dict for now
+    global_measurement_bases["received"] += 1
     status = True
 
     print(global_measurement_bases)
 
+    dataReply = json.dumps( { "status": status } )
+    return dataReply
+
+@app.route('/check_handshake', methods=['GET', 'POST'])
+def check_handshake():
+    status = False
+
+    if global_measurement_bases["received"] == 2:
+        status = True
+    
     dataReply = json.dumps( { "status": status } )
     return dataReply
 
