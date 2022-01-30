@@ -56,4 +56,8 @@ def check_handshake():
     dataReply = json.dumps( { "status": status } )
     return dataReply
 
-
+@app.route('/perform_quantum_key_distribution', methods=['GET', 'POST'])
+def perform_quantum_key_distribution():
+    key = generateKey(global_measurement_bases["user1"], global_measurement_bases["user2"])
+    dataReply = json.dumps( { "key": key } )
+    return dataReply
