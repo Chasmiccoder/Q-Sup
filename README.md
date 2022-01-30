@@ -13,10 +13,10 @@ Here we propose an innovative way of secure key distribution using a web interfa
 
 Our key distribution technique is based on the E91 protocol. 
 
+![image](https://user-images.githubusercontent.com/68393451/151702199-7d0bac60-b2e0-405f-a7d0-5ac462314bba.png)
 
-![image](https://user-images.githubusercontent.com/68393451/151692204-7eb03351-9baf-4d18-850f-2e0956ae4b63.png)
+Image source: [link](https://medium.com/@qcgiitr/fundamentals-of-quantum-key-distribution-bb84-b92-e91-protocols-e1373b683ead)
 
- The above image is a rough representation of the E91 protocol set-up
 
 # A little bit about Q - Sup
 Q-Sup revolves around three parties : Alice, Bob and the server. Alice and Bob are assumed to be the users of the app nad the server is the intermediate channel.
