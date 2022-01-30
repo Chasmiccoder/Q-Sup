@@ -1,8 +1,5 @@
-"""
-
-"""
-
 import os
+import random
 from apikey import token
 
 from qiskit import execute
@@ -11,31 +8,108 @@ from qiskit.circuit import QuantumRegister, ClassicalRegister, QuantumCircuit
 from quantuminspire.credentials import enable_account, get_authentication
 from quantuminspire.qiskit import QI
 
+# Initiating the Quantum Inspire Account -
 enable_account(token)
-
-QI_URL = os.getenv('API_URL', 'https://api.quantum-inspire.com/')
-
-project_name = 'Qiskit-entangle'
 authentication = get_authentication()
-# QI.set_authentication(authentication, QI_URL, project_name=project_name)
 QI.set_authentication()
 qi_backend = QI.get_backend('QX single-node simulator')
 
-q = QuantumRegister(2)
-b = ClassicalRegister(2)
-circuit = QuantumCircuit(q, b)
+def entangle_qubits(qc, q, q1, q2):
+    """
+    Puts the specified qubits in a maximally entangled state - |psi+>
+    |psi+> = 1/root(2) * (|01> + |10>)
+    
+    Params:
+    qc = quantum circuit object
+    q  = qubits
+    q1, q2 = the two qubits to be entangled
+    """
+    
+    qc.h(q[q1])
+    qc.x(q[q2])
+    qc.cx(q[q1], q[q2])
 
-circuit.h(q[0])
-circuit.cx(q[0], q[1])
-circuit.measure(q, b)
+def perform_measurement(qc, q, b, basis1, basis2):
+    """
+    Returns one bit of the key generated using the Ekert 91 protocol
+    basis1 = Measurement basis of Alice
+    basis2 = Measurement basis of Bob
+    """
+    
+    alice = basis1
+    bob = basis2
 
-qi_job = execute(circuit, backend=qi_backend, shots=256)
-qi_result = qi_job.result()
-histogram = qi_result.get_counts(circuit)
-print('\nState\tCounts')
-[print('{0}\t\t{1}'.format(state, counts)) for state, counts in histogram.items()]
+    if alice == 2:
+        qc.x(q[0])
 
-# Print the full state probabilities histogram
-probabilities_histogram = qi_result.get_probabilities(circuit)
-print('\nState\tProbabilities')
-[print('{0}\t\t{1}'.format(state, val)) for state, val in probabilities_histogram.items()]
+    if bob == 2:
+        qc.x(q[1])
+
+    qc.measure(q, b)
+    qi_job = execute(qc, backend=qi_backend, shots=1)
+    qi_result = qi_job.result()
+    result = qi_result.get_counts(qc)
+
+    outcome = list(result.keys())[0]
+    return outcome[0], outcome[1]
+    
+def ekert91(basis1, basis2):
+    
+    q = QuantumRegister(2)
+    b = ClassicalRegister(2)
+    qc = QuantumCircuit(q, b)
+    
+    # Step 1 - Creating EPR Pair
+    entangle_qubits(qc, q, 0, 1)
+    
+    # Step 2 - 
+    outcome = perform_measurement(qc, q, b, basis1, basis2)
+    return outcome[0], outcome[1]
+
+def generateKey(bases1, bases2):
+    if len(bases1) != len(bases2) or len(bases1) != 10:
+        return False
+    
+    aliceOutcome = []
+    bobOutcome = []
+    
+    # Taking 10 bits for our unsifted key
+    n = 10
+    for i in range(n):
+        result = ekert91(bases1[i], bases2[i])
+        aliceOutcome.append(int(result[0]))
+        bobOutcome.append(int(result[1]))
+    
+    # Send the outcomes to the respective receivers
+    # After this, Alice and Bob will publicly announce their measurement 
+    # bases and obtain the sifted key!
+    return aliceOutcome, bobOutcome
+
+def generateBases(n):
+    """
+    Function to generate a psuedorandom sequence of bases 
+    """
+    bases = []
+    
+    for i in range(n):
+        bases.append(random.randint(1,2))
+
+    return bases
+
+def getSiftedKey(key, user, bases1, bases2):
+    siftedKey = []
+    
+    for i in range(len(bases1)):
+        if bases1[i] == bases2[i]:
+            if bases1[i] == 1: # Both measured along the Z basis, flip Bob's bit
+                if user == "Bob":
+                    if key[i] == 0:
+                        siftedKey.append(1)
+                    else:
+                        siftedKey.append(0)
+                else:
+                    siftedKey.append(key[i])
+            else: # Both measured along the X basis
+                siftedKey.append(key[i])
+    
+    return siftedKey

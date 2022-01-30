@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request
 import json
+from quantum_backend import generateKey
 app = Flask(__name__)
 
 global_measurement_bases = {}
