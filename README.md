@@ -1,7 +1,5 @@
-# Quantum-Maze
-A Quantum Maze game that can be solved only with successful quantum key distribution.
-Two users A and B are stuck in a maze and the only way they can leave the maze is by inputting the same bit of strings i.e. a secret key. However if anyone else learns their key that person will use the key to lock them in. 
 
+![image](https://user-images.githubusercontent.com/68393451/151698106-9d09631f-8883-4376-a01e-9ef92d1f317b.png)
 
 
 # A little bit about the protocol in use : The E91 Quantum Key Distribution Protocol
@@ -11,6 +9,13 @@ Two users A and B are stuck in a maze and the only way they can leave the maze i
 
  The above image is a rough representation of the E91 protocol set-up
 
+# A little bit about Q - Sup
+Q-Sup revolves around three parties : Alice, Bob and the server. Alice and Bob are assumed to be the users of the app nad the server is the intermediate channel.
+Two users- A and B  and the server which serves as the intermediate channel. For two users to communicate, they need to input the same bit string. They need to excahnge this key in a way that is only known to them. 
+
+The following flow chart encapsulates the working of the app :
+
+![image](https://user-images.githubusercontent.com/68393451/151696305-77b7bbf9-b7fe-4c59-b434-88a15a4e9e81.png)
 
 
 
