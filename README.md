@@ -1,4 +1,5 @@
 
+![image](https://user-images.githubusercontent.com/68393451/151698106-9d09631f-8883-4376-a01e-9ef92d1f317b.png)
 
 
 # A little bit about the protocol in use : The E91 Quantum Key Distribution Protocol
