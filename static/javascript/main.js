@@ -32,9 +32,9 @@ const initiateTextChannel = () => {
     loginDiv.style.display = 'none'; // hide
 
     // A short write up of how this works
-    str = "The Measurement possibilities are as follows. For user 1 - A1, A2, A2. For user 2 - B1, B2, B3";
-    str += "A1 = Alice measures along the Z Basis, A2 = Alice measures along the X Basis, A3 - Alice measures along the 1/root(2) * (Z + X) basis";
-    str += "B1 = Bob measures along the Z Basis, B2 = Bob measures along the 1/root(2) * (Z - X) basis, B3 - Bob measures along the 1/root(2) * (Z + X) basis";
+    str = "The Measurement possibilities are as follows. For user 1 - A1, A2, A2. For user 2 - B1, B2, B3 ";
+    str += "A1 = Alice measures along the Z Basis, A2 = Alice measures along the X Basis ";
+    str += "B1 = Bob measures along the Z Basis, B2 = Bob measures along the X Basis ";
 
     var description = document.createElement("p");
     description.setAttribute("id", "description-p");
@@ -144,20 +144,22 @@ const initiateQKD = () => {
 
 
 // basically, this function checks whether both users have supplied their measurement bases to the interface or not
-const check_handshake = (event) => {
-
+const check_handshake = (event) => {    
     var xml = new XMLHttpRequest();
     xml.open("POST", "/check_handshake", true);
     xml.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xml.onload = function() {
         var dataReply = JSON.parse(this.responseText);
-        
+
         if (dataReply["status"] == false) {
             str = "Please wait until the other user sends their measurement bases!";
             document.getElementById("handshake-status-p").innerHTML = str;
         } else {
             str = "The system is ready for quantum key distribution!";
             document.getElementById("handshake-status-p").innerHTML = str;
+            // quantumReady = true;
+            getMainKey();
+            return;
         }
     };
 
@@ -165,6 +167,32 @@ const check_handshake = (event) => {
     xml.send(JSON.stringify(dataSend));
 }
 
+const getMainKey = () => {
+
+    var xml = new XMLHttpRequest();
+    xml.open("POST", "/perform_quantum_key_distribution", true);
+    xml.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xml.onload = function() {
+        var dataReply = JSON.parse(this.responseText);
+        var key = dataReply["key"];
+        console.log(key);
+
+        var output = document.createElement("p");
+        output.setAttribute("id", "output-p");
+        var output2 = document.createElement("p");
+        output2.setAttribute("id", "output2-p");
+        var div = document.getElementById("communicate-div");
+        div.appendChild(output);
+        div.appendChild(output2);
+        
+        str = "The key generated is: " + key;
+        document.getElementById("output-p").innerHTML = str;
+        document.getElementById("output2-p").innerHTML = "Now publicly disclose the measurement bases and get the sifted key!";
+    };
+
+    dataSend = {"user": currentUser};
+    xml.send(JSON.stringify(dataSend));
+}
 
 const isNumber = (str) => {
     if(typeof str != "string") {
@@ -175,7 +203,8 @@ const isNumber = (str) => {
 }
 
 var currentUser = null;
+var siftedKey = null;
+var quantumReady = null; // turns true if a key has already been generated
 
 const login_form = document.getElementById("login-form");
 login_form.onsubmit = authenticate;
-

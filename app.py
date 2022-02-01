@@ -5,6 +5,7 @@ app = Flask(__name__)
 
 global_measurement_bases = {}
 global_measurement_bases["received"] = 0
+global_key = {}
 
 @app.route("/")
 def home():
@@ -40,8 +41,6 @@ def send_measurement_sequence():
     global_measurement_bases["received"] += 1
     status = True
 
-    print(global_measurement_bases)
-
     dataReply = json.dumps( { "status": status } )
     return dataReply
 
@@ -56,4 +55,19 @@ def check_handshake():
     dataReply = json.dumps( { "status": status } )
     return dataReply
 
+@app.route('/perform_quantum_key_distribution', methods=['GET', 'POST'])
+def perform_quantum_key_distribution():
+    
+    dataGet = request.get_json(force=True)  
+    
+    if len(global_key) == 0:
+        global_key_tmp = generateKey(global_measurement_bases["user1"], global_measurement_bases["user2"])
+        # global_key_tmp = ekert91(global_measurement_bases["user1"], global_measurement_bases["user2"])
 
+        global_key["user1"] = global_key_tmp[0]
+        global_key["user2"] = global_key_tmp[1]
+    
+    dataReply = json.dumps( { "key": global_key[dataGet["user"]] } ) # Send only the user's measurements. The user should not be able to view the other user's measurement
+    
+    print(global_key)
+    return dataReply
