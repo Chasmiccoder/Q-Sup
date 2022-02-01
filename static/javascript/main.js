@@ -91,7 +91,7 @@ const sendMeasurement = (event) => {
     
     for(let i = 0; i < stringSequence.length; i++) {
         let element = stringSequence[i];
-        if(isNumber(element) && parseInt(element) >= 1 && parseInt(element) <= 3) {
+        if(isNumber(element) && parseInt(element) >= 1 && parseInt(element) <= 2) {
             bases.push(parseInt(element));
         } else {
             alert("Invalid Input!");
@@ -157,7 +157,6 @@ const check_handshake = (event) => {
         } else {
             str = "The system is ready for quantum key distribution!";
             document.getElementById("handshake-status-p").innerHTML = str;
-            // quantumReady = true;
             getMainKey();
             return;
         }
@@ -204,7 +203,6 @@ const isNumber = (str) => {
 
 var currentUser = null;
 var siftedKey = null;
-var quantumReady = null; // turns true if a key has already been generated
 
 const login_form = document.getElementById("login-form");
 login_form.onsubmit = authenticate;
